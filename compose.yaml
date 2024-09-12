@@ -1,0 +1,58 @@
+services:
+  procedures-backend:
+    build:
+      context: procedures-backend
+    ports:
+      - 8080:8080
+    environment: 
+     - SPRING_RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - postgres
+    networks:
+      - procedures-network
+  mail-sender:
+    build:
+      context: mail-sender
+    ports:
+      - 8181:8181
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+    networks:
+      - procedures-network
+  procedures-frontend:
+    build:
+      context: procedures-frontend
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4200:4200
+    volumes:
+      - /app/node_modules
+    networks:
+      - procedures-network
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=testuser
+    ports:
+      - 5432
+    networks:
+      - procedures-network
+  rabbitmq:
+    image: rabbitmq:management
+    environment:
+      - RABBITMQ_DEFAULT_PASS=secret
+      - RABBITMQ_DEFAULT_USER=testuser
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - procedures-network
+networks:
+  procedures-network:
+    driver: bridge
+
