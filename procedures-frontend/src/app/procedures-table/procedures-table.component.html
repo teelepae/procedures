@@ -1,0 +1,30 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Eesnimi</th>
+    <th scope="col">Perekonnanimi</th>
+    <th scope="col">ID kood</th>
+    <th scope="col">E-post</th>
+    <th scope="col">Põhjus</th>
+    <th scope="col">E-kiri</th>
+  </tr>
+  </thead>
+  <tbody>
+  @for (procedure of procedureList; track procedure.id; let i = $index) {
+  <tr>
+    <td>{{ procedure.firstName }}</td>
+    <td>{{ procedure.lastName }}</td>
+    <td>{{ procedure.idCode }}</td>
+    <td>{{ procedure.email }}</td>
+    <td>{{ procedure.reason }}</td>
+    <td>
+      @if(procedure.letter){
+      <span class="badge rounded-pill text-bg-success">
+        Kiri saadetud
+      </span>
+      }
+    </td>
+  </tr>
+  }
+  </tbody>
+</table>

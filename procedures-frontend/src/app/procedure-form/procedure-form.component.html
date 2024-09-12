@@ -1,0 +1,23 @@
+<div class="card m-4">
+  <div class="card-body">
+    <form [formGroup]="procedureForm">
+      <label for="first-name">Eesnimi: </label>
+      <input class="form-control custom-control" id="first-name" type="text" formControlName="firstName">
+      <label for="last-name">Perekonnanimi: </label>
+      <input class="form-control custom-control" id="last-name" type="text" formControlName="lastName">
+      <label for="id-code">ID kood: </label>
+      <input class="form-control custom-control" id="id-code" type="number" formControlName="idCode">
+      <label for="email">E-post: </label>
+      <input class="form-control custom-control" id="email" type="email" formControlName="email">
+      @if(procedureForm.get('email')?.invalid && (procedureForm.get('email')?.dirty || procedureForm.get('email')?.touched)){
+      <div class="alert alert-danger" role="alert">
+        Vale e-posti aadress
+      </div>
+      }
+      <label for="reason">Põhjus: </label>
+      <input class="form-control custom-control" id="reason" type="text" formControlName="reason">
+
+      <button type="button" class="btn btn-primary mt-4" (click)="addProcedure()" [disabled]="procedureForm.invalid">Add</button>
+    </form>
+  </div>
+</div>

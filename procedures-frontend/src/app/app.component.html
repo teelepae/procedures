@@ -1,0 +1,5 @@
+<div class="container">
+  <h1 class="d-flex justify-content-center p-4">Menetlused</h1>
+<procedure-form (saveEvent)="formSaved($event)"></procedure-form>
+<procedures-table [procedureSaved]="procedureSaved" (refreshEndedEvent)="noEvents()"></procedures-table>
+</div>
