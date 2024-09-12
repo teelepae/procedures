@@ -1,3 +1,3 @@
 # Procedures ehk menetlused
 
-Alla laadides procedures kaustas jooksutada: docker compose up
+Alla laadides procedures kaustas jooksutada: docker compose up --build
